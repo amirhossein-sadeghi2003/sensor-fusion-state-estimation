@@ -1,0 +1,14 @@
+venv/
+.venv/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# Generated local artifacts
+data/raw/
+models/
+
+# OS/editor
+.DS_Store
+.vscode/
+.idea/
