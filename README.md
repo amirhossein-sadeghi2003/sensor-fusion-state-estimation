@@ -297,6 +297,9 @@ sensor-fusion-state-estimation/
 - `src/evaluate_noise_levels.py`  
   Runs a GPS noise-level comparison experiment and evaluates how raw GPS-like measurements and Kalman estimates behave under different measurement noise levels.
 
+- `docs/math_model.md`  
+  Explains the state vector, motion model, measurement model, Kalman Filter prediction/correction steps, and GPS dropout behavior.
+
 - `data/simulated/simulated_sensor_data.csv`  
   Simulated sensor dataset with true states and noisy sensor measurements.
 
