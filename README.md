@@ -13,6 +13,7 @@ The project focuses on:
 - Kalman Filter state estimation
 - trajectory and position error visualization
 - RMSE-based evaluation
+- GPS noise-level comparison
 
 ---
 
@@ -32,6 +33,7 @@ simulated 2D trajectory
 → Kalman Filter prediction and correction
 → estimated trajectory
 → RMSE and error analysis
+→ GPS noise-level comparison
 ```
 
 ---
@@ -177,6 +179,10 @@ When GPS-like measurements are unavailable, such as during the dropout interval,
 
 ![GPS Dropout Estimation](results/gps_dropout_estimation.png)
 
+### GPS Noise-Level Comparison
+
+![GPS Noise-Level RMSE Comparison](results/noise_level_rmse_comparison.png)
+
 ---
 
 ## Results
@@ -213,6 +219,44 @@ data/simulated/kalman_estimates.csv
 
 ---
 
+## Noise-Level Comparison
+
+To evaluate robustness under different sensor conditions, this project includes a GPS noise-level comparison experiment.
+
+The experiment repeats the simulation and Kalman Filter estimation for several GPS-like measurement noise levels:
+
+```text
+1 m, 2 m, 3 m, 5 m, 8 m, 12 m
+```
+
+For each noise level, the experiment is repeated 5 times with different random seeds.
+
+Generated outputs:
+
+```text
+results/noise_level_comparison.csv
+results/noise_level_rmse_comparison.png
+```
+
+### Noise-Level RMSE Comparison
+
+![GPS Noise-Level RMSE Comparison](results/noise_level_rmse_comparison.png)
+
+The results show that the Kalman Filter consistently reduces position RMSE compared with raw GPS-like measurements across all tested noise levels.
+
+At high GPS noise levels, the gap between raw measurements and Kalman estimates becomes larger, showing the value of combining a motion model with noisy sensor data.
+
+Example results:
+
+| GPS Noise Std | Raw GPS RMSE | Kalman Full-Trajectory RMSE |
+|---:|---:|---:|
+| 1 m | 1.38 m | 0.83 m |
+| 3 m | 4.13 m | 1.99 m |
+| 8 m | 11.01 m | 5.17 m |
+| 12 m | 16.51 m | 7.75 m |
+
+---
+
 ## Repository Structure
 
 ```text
@@ -225,11 +269,14 @@ sensor-fusion-state-estimation/
 ├── results/
 │   ├── gps_dropout_estimation.png
 │   ├── kalman_estimated_trajectory.png
+│   ├── noise_level_comparison.csv
+│   ├── noise_level_rmse_comparison.png
 │   ├── position_error_over_time.png
 │   ├── rmse_comparison.csv
 │   ├── true_vs_gps_measurements.png
 │   └── true_vs_imu_acceleration.png
 ├── src/
+│   ├── evaluate_noise_levels.py
 │   ├── kalman_filter.py
 │   └── simulate_motion.py
 ├── .gitignore
@@ -247,6 +294,9 @@ sensor-fusion-state-estimation/
 - `src/kalman_filter.py`  
   Implements a Kalman Filter for 2D position and velocity estimation using GPS-like position measurements and IMU-like acceleration inputs.
 
+- `src/evaluate_noise_levels.py`  
+  Runs a GPS noise-level comparison experiment and evaluates how raw GPS-like measurements and Kalman estimates behave under different measurement noise levels.
+
 - `data/simulated/simulated_sensor_data.csv`  
   Simulated sensor dataset with true states and noisy sensor measurements.
 
@@ -255,6 +305,12 @@ sensor-fusion-state-estimation/
 
 - `results/rmse_comparison.csv`  
   RMSE comparison between raw GPS-like measurements and Kalman Filter estimates.
+
+- `results/noise_level_comparison.csv`  
+  RMSE comparison across multiple GPS-like measurement noise levels.
+
+- `results/noise_level_rmse_comparison.png`  
+  Visualization of how position RMSE changes as GPS-like measurement noise increases.
 
 ---
 
@@ -289,6 +345,12 @@ Run Kalman Filter estimation:
 
 ```bash
 python src/kalman_filter.py
+```
+
+Run GPS noise-level comparison:
+
+```bash
+python src/evaluate_noise_levels.py
 ```
 
 ---
@@ -332,7 +394,6 @@ Current limitations:
 Planned extensions:
 
 - add IMU bias and drift simulation
-- add noise-level comparison experiments
 - add longer GPS dropout experiments
 - compare different Kalman Filter tuning parameters
 - add Extended Kalman Filter for nonlinear motion
