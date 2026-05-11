@@ -1,0 +1,4 @@
+method,position_rmse_m,notes
+Raw GPS-like measurements,4.508130636628709,Computed only when GPS-like measurements are available
+Kalman filter estimate,2.6076428434085095,Computed over the full trajectory
+Kalman estimate at GPS timestamps,1.8205878475738284,Computed only at GPS measurement timestamps
