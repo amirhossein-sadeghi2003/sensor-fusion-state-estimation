@@ -300,6 +300,9 @@ sensor-fusion-state-estimation/
 - `docs/math_model.md`  
   Explains the state vector, motion model, measurement model, Kalman Filter prediction/correction steps, and GPS dropout behavior.
 
+- `docs/project_report.md`  
+  Provides a project-level report covering the goal, sensor model, Kalman Filter design, experiments, results, limitations, and future work.
+
 - `data/simulated/simulated_sensor_data.csv`  
   Simulated sensor dataset with true states and noisy sensor measurements.
 
