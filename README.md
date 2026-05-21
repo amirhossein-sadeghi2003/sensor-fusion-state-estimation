@@ -303,6 +303,9 @@ sensor-fusion-state-estimation/
 - `docs/project_report.md`  
   Provides a project-level report covering the goal, sensor model, Kalman Filter design, experiments, results, limitations, and future work.
 
+- `docs/results_interpretation.md`  
+  Explains the RMSE results, GPS dropout behavior, noise-level comparison, project limitations, and relevance to robotics and navigation.
+
 - `data/simulated/simulated_sensor_data.csv`  
   Simulated sensor dataset with true states and noisy sensor measurements.
 
