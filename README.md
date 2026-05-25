@@ -418,3 +418,9 @@ This project demonstrates 2D sensor fusion and state estimation for an autonomou
 It simulates a moving platform, generates noisy GPS-like and IMU-like measurements, applies a Kalman Filter, and evaluates the estimated trajectory using RMSE and error plots.
 
 The project is designed as a clean bridge between dynamic systems, sensing, robotics, aerospace-inspired navigation, and intelligent physical systems.
+
+## Visual overview
+
+The figure below summarizes the main sensor fusion outputs: noisy GPS measurements, Kalman estimated trajectory, position error over time, and GPS dropout behavior.
+
+![Sensor Fusion Visual Overview](results/sensor_fusion_visual_overview.png)
