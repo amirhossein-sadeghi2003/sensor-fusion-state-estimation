@@ -424,3 +424,9 @@ The project is designed as a clean bridge between dynamic systems, sensing, robo
 The figure below summarizes the main sensor fusion outputs: noisy GPS measurements, Kalman estimated trajectory, position error over time, and GPS dropout behavior.
 
 ![Sensor Fusion Visual Overview](results/sensor_fusion_visual_overview.png)
+
+### Live Trajectory Tracking Animation
+
+The animation below shows the Kalman Filter tracking the moving platform over time. It visualizes the true trajectory, noisy GPS-like measurements, and the estimated trajectory during normal updates and GPS dropout.
+
+![Trajectory Tracking Animation](results/trajectory_tracking_animation.gif)
