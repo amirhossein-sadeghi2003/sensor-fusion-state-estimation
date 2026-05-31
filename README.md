@@ -1,57 +1,41 @@
 # Sensor Fusion State Estimation
 
-Aerospace- and robotics-inspired state estimation project for autonomous motion tracking using simulated sensor data and Kalman filtering.
+I built this project to test a simple question: if position measurements become noisy or temporarily disappear, how much can a motion model and IMU-like acceleration help keep the estimated trajectory stable?
 
-This project demonstrates how noisy GPS-like position measurements and IMU-like acceleration measurements can be fused with a motion model to estimate the trajectory of a moving platform.
+The setup is intentionally simulated. A 2D platform follows a scripted motion path, noisy GPS-like measurements provide intermittent position updates, and IMU-like acceleration is used in the Kalman Filter prediction step.
 
-The project focuses on:
+The most useful part of the project is not just the final trajectory plot. It is the comparison between normal GPS updates, a GPS dropout interval, and different GPS noise levels. That made the estimator's strengths and weaknesses much easier to see.
 
-- 2D dynamic motion simulation
+Main pieces:
+
+- 2D motion simulation
 - GPS-like noisy position measurements
-- IMU-like acceleration measurements
-- GPS dropout simulation
-- Kalman Filter state estimation
-- trajectory and position error visualization
-- RMSE-based evaluation
-- GPS noise-level comparison
+- IMU-like acceleration inputs
+- GPS dropout experiment
+- linear Kalman Filter state estimation
+- RMSE and error plots
+- multi-noise-level comparison
+- trajectory tracking animation
 
 ---
 
-## Project Overview
+## What I built
 
-The goal of this project is to estimate the 2D position and velocity of a moving platform using noisy sensor data.
+The goal is to estimate the 2D position and velocity of a moving platform using a linear Kalman Filter.
 
-The simulated platform follows a scripted 2D motion profile with acceleration, turning, and deceleration phases.
+The simulated platform follows a scripted 2D motion profile with acceleration, turning, and deceleration phases. I then generate noisy sensor measurements and compare the estimated trajectory against the true trajectory.
 
-The workflow is:
+Workflow:
 
-```text
-simulated 2D trajectory
-→ noisy GPS-like position measurements
-→ noisy IMU-like acceleration measurements
-→ GPS dropout interval
-→ Kalman Filter prediction and correction
-→ estimated trajectory
-→ RMSE and error analysis
-→ GPS noise-level comparison
-```
+- simulated 2D trajectory
+- noisy GPS-like position measurements
+- IMU-like acceleration inputs
+- GPS dropout interval
+- Kalman Filter prediction/correction
+- estimated trajectory
+- RMSE and error analysis
 
----
-
-## Motivation
-
-State estimation is a core part of many autonomous and intelligent physical systems.
-
-In real-world systems, sensor measurements are often noisy, incomplete, or temporarily unavailable. A state estimator can combine a motion model with sensor measurements to produce a more reliable estimate of the system state.
-
-This project is designed as a portfolio project connecting:
-
-- dynamic systems
-- sensor data
-- robotics-inspired motion tracking
-- aerospace-inspired trajectory estimation
-- Kalman filtering
-- intelligent physical systems
+One thing I had to tune carefully was the balance between trusting the motion model and trusting the GPS-like measurements. When the GPS noise is increased, the filter can still smooth the trajectory, but it cannot magically recover information that is not present in the measurements.
 
 ---
 
@@ -338,12 +322,6 @@ Install dependencies:
 pip install -r requirements.txt
 ```
 
-If internet access is limited, dependencies can also be installed from a local wheelhouse:
-
-```bash
-pip install --no-index --find-links=/home/amir/python-wheels -r requirements.txt
-```
-
 Generate simulated trajectory and sensor data:
 
 ```bash
@@ -364,24 +342,11 @@ python src/evaluate_noise_levels.py
 
 ---
 
-## Portfolio Context
+## What the results show
 
-This project supports a broader portfolio direction focused on:
+The filter performs best when the simulated GPS-like measurements are noisy but still available. During the GPS dropout interval, the estimate depends more heavily on the motion model and acceleration input, so the position error grows more easily.
 
-```text
-AI / ML for Intelligent Physical Systems
-```
-
-It connects computer engineering skills with physical-system modeling, sensing, state estimation, and autonomous-system concepts.
-
-The project can be discussed in the context of:
-
-- control systems
-- robotics
-- autonomous systems
-- cyber-physical systems
-- embedded sensing
-- aerospace-inspired monitoring and navigation
+This is the main engineering takeaway: sensor fusion is not just about adding more sensors. It is about understanding what each sensor can and cannot correct.
 
 ---
 
@@ -417,7 +382,7 @@ This project demonstrates 2D sensor fusion and state estimation for an autonomou
 
 It simulates a moving platform, generates noisy GPS-like and IMU-like measurements, applies a Kalman Filter, and evaluates the estimated trajectory using RMSE and error plots.
 
-The project is designed as a clean bridge between dynamic systems, sensing, robotics, aerospace-inspired navigation, and intelligent physical systems.
+The project is a small bridge between dynamic systems, sensing, filtering, and robotics-style motion tracking.
 
 ## Visual overview
 
