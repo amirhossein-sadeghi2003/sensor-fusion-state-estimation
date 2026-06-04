@@ -76,7 +76,7 @@ This explains why the performance gap between raw GPS-like measurements and Kalm
 
 ## Relevance to Robotics and Navigation
 
-This project represents a simplified version of a common problem in robotics, autonomous systems, and aerospace-inspired navigation.
+This project represents a simplified version of a common problem in robotics, autonomous systems, and navigation with noisy sensors.
 
 A real autonomous system often needs to estimate its state using imperfect sensors. For example:
 

@@ -13,7 +13,7 @@ The goal is to estimate the position and velocity of a moving platform using:
 - RMSE-based evaluation
 - GPS dropout and noise-level experiments
 
-The project is inspired by robotics, autonomous systems, and aerospace-style navigation problems, where a system must estimate its state from noisy and incomplete sensor measurements.
+The project is inspired by robotics, autonomous systems, and navigation problems where a system must estimate its state from noisy and incomplete sensor measurements.
 
 ---
 
@@ -26,7 +26,7 @@ Examples include:
 - mobile robots
 - drones
 - autonomous vehicles
-- aerospace navigation systems
+- navigation and tracking systems
 - embedded monitoring platforms
 - cyber-physical systems
 
@@ -340,7 +340,7 @@ This makes the project relevant to:
 - control systems
 - robotics
 - autonomous systems
-- aerospace-inspired navigation
+- robotics and navigation
 - embedded sensing
 - cyber-physical systems
 
@@ -394,7 +394,7 @@ It connects computer engineering with:
 - Kalman filtering
 - state estimation
 - robotics-inspired motion tracking
-- aerospace-inspired navigation
+- robotics and navigation
 - autonomous systems
 
 It is also a bridge toward future hardware projects such as:
