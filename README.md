@@ -167,6 +167,12 @@ When GPS-like measurements are unavailable, such as during the dropout interval,
 
 ![GPS Noise-Level RMSE Comparison](results/noise_level_rmse_comparison.png)
 
+### IMU Bias Sensitivity
+
+![IMU Bias RMSE Comparison](results/imu_bias_rmse_comparison.png)
+
+![IMU Bias Trajectory Comparison](results/imu_bias_trajectory_comparison.png)
+
 ---
 
 ## Results
@@ -238,6 +244,28 @@ Example results:
 | 3 m | 4.13 m | 1.99 m |
 | 8 m | 11.01 m | 5.17 m |
 | 12 m | 16.51 m | 7.75 m |
+
+## IMU Bias Sensitivity
+
+I also added an IMU acceleration-bias sensitivity experiment. This tests what happens when the filter receives acceleration measurements with a small constant bias.
+
+This matters because acceleration bias is dangerous during GPS dropout. When GPS-like measurements are available, the Kalman correction step can pull the estimate back toward the measured position. During dropout, the filter has to rely more heavily on the motion model and IMU-like acceleration input, so bias can accumulate quickly.
+
+Generated outputs:
+
+- `results/imu_bias_sensitivity.csv`
+- `results/imu_bias_rmse_comparison.png`
+- `results/imu_bias_trajectory_comparison.png`
+
+Example results:
+
+| IMU Bias Level | Full-Trajectory RMSE | GPS-Dropout RMSE | Final Error |
+|---:|---:|---:|---:|
+| 0.00 m/s² | 1.99 m | 2.42 m | 0.92 m |
+| 0.10 m/s² | 4.76 m | 9.56 m | 1.41 m |
+| 0.35 m/s² | 15.16 m | 31.75 m | 6.27 m |
+
+The main takeaway is that the estimator is much more sensitive to IMU bias during the GPS dropout interval than during normal GPS-corrected operation.
 
 ---
 
@@ -338,6 +366,7 @@ Run GPS noise-level comparison:
 
 ```bash
 python src/evaluate_noise_levels.py
+python src/evaluate_imu_bias.py
 ```
 
 ---
@@ -357,7 +386,7 @@ Current limitations:
 - the trajectory is simulated
 - the GPS and IMU measurements are synthetic
 - the model uses a linear Kalman Filter
-- IMU bias and drift are not yet modeled
+- IMU bias is tested in a sensitivity experiment, but the filter does not yet estimate or compensate for bias
 - orientation estimation is not included
 - the system does not yet use real hardware sensor data
 
@@ -367,7 +396,7 @@ Current limitations:
 
 Planned extensions:
 
-- add IMU bias and drift simulation
+- add IMU bias estimation or bias-compensated filtering
 - add longer GPS dropout experiments
 - compare different Kalman Filter tuning parameters
 - add Extended Kalman Filter for nonlinear motion
