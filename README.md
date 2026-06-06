@@ -280,6 +280,9 @@ sensor-fusion-state-estimation/
 ├── docs/
 ├── results/
 │   ├── gps_dropout_estimation.png
+│   ├── imu_bias_rmse_comparison.png
+│   ├── imu_bias_sensitivity.csv
+│   ├── imu_bias_trajectory_comparison.png
 │   ├── kalman_estimated_trajectory.png
 │   ├── noise_level_comparison.csv
 │   ├── noise_level_rmse_comparison.png
@@ -288,6 +291,7 @@ sensor-fusion-state-estimation/
 │   ├── true_vs_gps_measurements.png
 │   └── true_vs_imu_acceleration.png
 ├── src/
+│   ├── evaluate_imu_bias.py
 │   ├── evaluate_noise_levels.py
 │   ├── kalman_filter.py
 │   └── simulate_motion.py
@@ -308,6 +312,9 @@ sensor-fusion-state-estimation/
 
 - `src/evaluate_noise_levels.py`  
   Runs a GPS noise-level comparison experiment and evaluates how raw GPS-like measurements and Kalman estimates behave under different measurement noise levels.
+
+- `src/evaluate_imu_bias.py`  
+  Runs an IMU bias sensitivity experiment and measures how constant acceleration bias affects full-trajectory RMSE, GPS-dropout RMSE, and final estimation error.
 
 - `docs/math_model.md`  
   Explains the state vector, motion model, measurement model, Kalman Filter prediction/correction steps, and GPS dropout behavior.
